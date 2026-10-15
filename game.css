@@ -1,0 +1,556 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Press+Start+2P&display=swap");
+
+:root {
+  --dark-red: #4b0d20;
+  --wine-red: #7e1934;
+  --red: #ba2949;
+  --bright-red: #ef4d6c;
+  --pink: #ffb7c4;
+  --soft-pink: #ffe7eb;
+  --cream: #fffaf3;
+  --gold: #f6c85f;
+  --dark-gold: #c8932e;
+  --text: #451b27;
+  --muted: #855664;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  font-family: "Nunito", Arial, sans-serif;
+  background-color: var(--dark-red);
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1.5px),
+    linear-gradient(135deg, #3f0919, #7e1934 55%, #531025);
+  background-size: 28px 28px, auto;
+}
+
+/* Main game frame */
+
+.game-screen {
+  width: min(950px, 92%);
+  min-height: 100vh;
+  margin: auto;
+  padding: 28px 0 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game-window {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 5vw, 55px);
+  border: 5px solid var(--gold);
+  border-radius: 10px;
+  background: rgba(255, 250, 243, 0.98);
+  box-shadow:
+    10px 10px 0 #27040e,
+    0 0 35px rgba(255, 183, 196, 0.28);
+}
+
+.game-window::before,
+.game-window::after {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  content: "";
+  background: var(--bright-red);
+}
+
+.game-window::before {
+  top: 0;
+  left: 0;
+}
+
+.game-window::after {
+  right: 0;
+  bottom: 0;
+}
+
+/* Top information bar */
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -10px 0 30px;
+  padding: 13px;
+  border: 3px solid var(--wine-red);
+  border-radius: 6px;
+  background: var(--soft-pink);
+  color: var(--wine-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.48rem, 1.5vw, 0.63rem);
+  line-height: 1.7;
+}
+
+.hud span {
+  text-align: center;
+}
+
+/* Typography */
+
+.game-label {
+  margin: 0 0 18px;
+  color: var(--red);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.58rem, 2vw, 0.82rem);
+  line-height: 1.9;
+  text-align: center;
+}
+
+.pixel-title {
+  margin: 0 0 20px;
+  color: var(--dark-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1.25rem, 4vw, 2.7rem);
+  line-height: 1.55;
+  text-align: center;
+  text-shadow: 3px 3px 0 var(--pink);
+}
+
+.handwritten-title {
+  margin: 0 0 18px;
+  color: var(--bright-red);
+  font-family: "Caveat", cursive;
+  font-size: clamp(2.7rem, 8vw, 5rem);
+  line-height: 1;
+  text-align: center;
+}
+
+.story-text {
+  max-width: 660px;
+  margin: 0 auto 18px;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.tiny-note {
+  max-width: 630px;
+  margin: 27px auto 0;
+  color: #9e6d79;
+  font-size: 0.85rem;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Buttons */
+
+.button-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.game-button {
+  display: inline-block;
+  padding: 16px 20px;
+  border: 3px solid #3b0715;
+  border-radius: 6px;
+  background: var(--bright-red);
+  color: var(--white);
+  box-shadow: 5px 5px 0 #3b0715;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.65rem;
+  line-height: 1.8;
+  text-align: center;
+  transition: 0.15s ease;
+}
+
+.game-button:hover {
+  transform: translate(3px, 3px);
+  background: #ce294b;
+  box-shadow: 2px 2px 0 #3b0715;
+}
+
+.game-button.secondary {
+  background: var(--cream);
+  color: var(--wine-red);
+}
+
+.game-button.secondary:hover {
+  background: var(--soft-pink);
+}
+
+/* Start screen stats */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  padding: 19px 12px;
+  border: 3px solid var(--wine-red);
+  border-radius: 8px;
+  background: var(--soft-pink);
+  box-shadow: 4px 4px 0 var(--wine-red);
+  text-align: center;
+}
+
+.stat-name {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--wine-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.5rem;
+  line-height: 1.8;
+}
+
+.stat-value {
+  color: var(--dark-red);
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Memory doors */
+
+.door-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 30px 0 10px;
+}
+
+.memory-door {
+  min-height: 250px;
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 4px solid var(--dark-red);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(255, 255, 255, 0.18) 49%, rgba(255, 255, 255, 0.18) 51%, transparent 52%),
+    linear-gradient(#b22849, #76142e);
+  box-shadow: 6px 6px 0 var(--dark-red);
+  color: var(--white);
+  text-align: center;
+  transition: 0.2s ease;
+}
+
+.memory-door:hover {
+  transform: translateY(-6px);
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(255, 255, 255, 0.25) 49%, rgba(255, 255, 255, 0.25) 51%, transparent 52%),
+    linear-gradient(#e64666, #941a39);
+}
+
+.door-icon {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 3rem;
+}
+
+.door-text {
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.6rem;
+  line-height: 2;
+}
+
+/* Unlock cards */
+
+.unlock-card {
+  max-width: 690px;
+  margin: 16px auto;
+  overflow: hidden;
+  border: 3px solid var(--wine-red);
+  border-radius: 8px;
+  background: var(--soft-pink);
+  box-shadow: 4px 4px 0 #e4abb6;
+}
+
+.unlock-card summary {
+  padding: 18px;
+  cursor: pointer;
+  color: var(--dark-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.54rem, 1.6vw, 0.68rem);
+  line-height: 1.9;
+  list-style: none;
+}
+
+.unlock-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.unlock-card summary::before {
+  margin-right: 12px;
+  content: "▶";
+  color: var(--bright-red);
+}
+
+.unlock-card[open] summary::before {
+  content: "▼";
+}
+
+.unlock-card[open] {
+  background: #ffd7df;
+}
+
+.unlock-content {
+  padding: 3px 21px 22px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.unlock-content strong {
+  color: var(--red);
+}
+
+/* Loot boxes */
+
+.loot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  max-width: 700px;
+  margin: 28px auto;
+}
+
+.loot-card {
+  border: 4px solid var(--dark-gold);
+  border-radius: 9px;
+  background: linear-gradient(135deg, #d23352, #81162f);
+  box-shadow: 6px 6px 0 var(--dark-red);
+}
+
+.loot-card summary {
+  padding: 27px 15px;
+  cursor: pointer;
+  color: white;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.6rem;
+  line-height: 2;
+  list-style: none;
+  text-align: center;
+}
+
+.loot-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.loot-card summary::before {
+  display: block;
+  margin-bottom: 10px;
+  content: "🎁";
+  font-size: 2.4rem;
+}
+
+.loot-card[open] {
+  background: #fff3d7;
+}
+
+.loot-card[open] summary {
+  color: var(--wine-red);
+}
+
+.loot-card[open] summary::before {
+  content: "✨";
+}
+
+.loot-reward {
+  padding: 5px 18px 23px;
+  color: var(--wine-red);
+  font-family: "Caveat", cursive;
+  font-size: 1.8rem;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Quest board */
+
+.quest-board {
+  max-width: 700px;
+  margin: 28px auto;
+  padding: 22px;
+  border: 4px solid var(--dark-red);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 249, 241, 0.9), rgba(255, 249, 241, 0.9)),
+    repeating-linear-gradient(45deg, transparent 0 10px, rgba(126, 25, 52, 0.06) 10px 12px);
+  box-shadow: 7px 7px 0 var(--dark-red);
+}
+
+.quest-item {
+  display: block;
+  margin: 12px 0;
+  padding: 15px;
+  cursor: pointer;
+  border: 2px solid #edc4cb;
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--wine-red);
+  font-weight: bold;
+  line-height: 1.5;
+  transition: 0.2s ease;
+}
+
+.quest-item:hover {
+  background: var(--soft-pink);
+}
+
+.quest-item input {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  accent-color: var(--bright-red);
+}
+
+.quest-item:has(input:checked) {
+  border-color: var(--bright-red);
+  background: #ffdce3;
+  color: var(--dark-red);
+  text-decoration: line-through;
+}
+
+/* Ending page */
+
+.end-card {
+  max-width: 700px;
+  margin: 25px auto 0;
+  padding: 30px;
+  border: 4px solid var(--gold);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7e1934, #4b0d20);
+  box-shadow: 7px 7px 0 #2c0610;
+  color: var(--white);
+  text-align: center;
+}
+
+.end-card h2 {
+  margin: 0 0 18px;
+  color: var(--gold);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(1rem, 3vw, 1.55rem);
+  line-height: 1.7;
+}
+
+.end-card p {
+  margin: 0;
+  font-family: "Caveat", cursive;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  line-height: 1.25;
+}
+
+/* Mobile */
+
+@media (max-width: 680px) {
+  .game-window {
+    border-width: 3px;
+    box-shadow: 6px 6px 0 #27040e;
+  }
+
+  .hud {
+    flex-direction: column;
+  }
+
+  .stat-grid,
+  .door-grid,
+  .loot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-door {
+    min-height: 160px;
+  }
+}
+.memory-map {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px auto 0;
+  padding-top: 24px;
+  border-top: 2px dashed #e7b3be;
+}
+
+.memory-map-label {
+  width: 100%;
+  margin: 0 0 5px;
+  color: var(--wine-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.52rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.memory-map a,
+.memory-map .current-memory {
+  display: inline-block;
+  padding: 11px 12px;
+  border: 3px solid var(--dark-red);
+  border-radius: 5px;
+  background: var(--cream);
+  color: var(--wine-red);
+  box-shadow: 3px 3px 0 var(--dark-red);
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.52rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.memory-map a:hover {
+  transform: translate(2px, 2px);
+  background: var(--soft-pink);
+  box-shadow: 1px 1px 0 var(--dark-red);
+}
+
+.memory-map .current-memory {
+  background: var(--bright-red);
+  color: white;
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+.memory-photo {
+  display: block;
+  width: min(100%, 450px);
+  height: auto;
+  margin: 25px auto;
+
+  border: 5px solid white;
+  border-radius: 12px;
+
+  box-shadow: 
+  0 0 0 4px var(--bright-red),
+  7px 7px 0 var(--dark-red);
+}
+
+.memory-video {
+  display: block;
+  width: min(100%, 550px);
+  height: auto;
+  max-height: 500px;
+  margin: 25px auto;
+
+  background: #240710;
+  object-fit: contain;
+
+  border: 5px solid white;
+  border-radius: 12px;
+
+  box-shadow:
+    0 0 0 4px var(--bright-red),
+    7px 7px 0 var(--dark-red);
+}
